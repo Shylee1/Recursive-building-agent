@@ -1,0 +1,279 @@
+{
+  "name": "Architecture Diagram",
+  "description": "Generated architecture diagram",
+  "components": [
+    {
+      "id": "1",
+      "type": "user",
+      "name": "User",
+      "position": {
+        "x": 2730,
+        "y": 885
+      },
+      "properties": {
+        "tech_stack": "N/A",
+        "description": "Human stakeholder requesting an enterprise‑grade solution"
+      }
+    },
+    {
+      "id": "2",
+      "type": "microservice",
+      "name": "Recursive Agent",
+      "position": {
+        "x": 2730,
+        "y": 540
+      },
+      "properties": {
+        "tech_stack": "Python, LLM Framework",
+        "description": "Orchestrates recursive task breakdown, research, execution, validation, optimization, and polishing",
+        "runtime": "Python",
+        "scalability": "horizontal"
+      }
+    },
+    {
+      "id": "3",
+      "type": "load_balancer",
+      "name": "Load Balancer",
+      "position": {
+        "x": 2640,
+        "y": 105
+      },
+      "properties": {
+        "tech_stack": "NGINX, HAProxy",
+        "description": "Distributes incoming user requests across planner instances",
+        "runtime": "C",
+        "scalability": "horizontal"
+      }
+    },
+    {
+      "id": "4",
+      "type": "api_gateway",
+      "name": "Subtask Planner",
+      "position": {
+        "x": 3255,
+        "y": 585
+      },
+      "properties": {
+        "tech_stack": "Go, FastAPI",
+        "description": "Splits high‑level intent into ordered subtasks",
+        "runtime": "Go",
+        "scalability": "vertical"
+      }
+    },
+    {
+      "id": "5",
+      "type": "microservice",
+      "name": "Research Module",
+      "position": {
+        "x": 3135,
+        "y": 225
+      },
+      "properties": {
+        "tech_stack": "WebSearch API, WolframAlpha, Python",
+        "description": "Gathers background, best practices, and relevant utilities",
+        "runtime": "Python",
+        "scalability": "horizontal"
+      }
+    },
+    {
+      "id": "6",
+      "type": "server",
+      "name": "Execution Engine",
+      "position": {
+        "x": 3645,
+        "y": 285
+      },
+      "properties": {
+        "tech_stack": "Docker, Kubernetes, Python",
+        "description": "Runs subtasks in isolated containers",
+        "runtime": "Python",
+        "scalability": "autoscaling"
+      }
+    },
+    {
+      "id": "7",
+      "type": "monitoring",
+      "name": "Validation Service",
+      "position": {
+        "x": 4095,
+        "y": 240
+      },
+      "properties": {
+        "tech_stack": "Prometheus, Grafana",
+        "runtime": "Go",
+        "scalability": "horizontal",
+        "description": "Continually checks alignment, performance, Accuracy , completion, quality (Enterprise grade/polished), Scalability, Capability,"
+      }
+    },
+    {
+      "id": "8",
+      "type": "microservice",
+      "name": "Optimization Engine",
+      "position": {
+        "x": 4500,
+        "y": 825
+      },
+      "properties": {
+        "tech_stack": "Python, TensorFlow",
+        "description": "Analyzes metrics and refines architecture",
+        "runtime": "Python",
+        "scalability": "vertical"
+      }
+    },
+    {
+      "id": "9",
+      "type": "cache",
+      "name": "Result Cache",
+      "position": {
+        "x": 3255,
+        "y": -120
+      },
+      "properties": {
+        "tech_stack": "Redis",
+        "description": "Stores intermediate research and execution results for reuse",
+        "runtime": "Go",
+        "scalability": "horizontal"
+      }
+    },
+    {
+      "id": "10",
+      "type": "database",
+      "name": "Task Store",
+      "position": {
+        "x": 3960,
+        "y": -60
+      },
+      "properties": {
+        "tech_stack": "PostgreSQL",
+        "description": "Persists task graphs, logs, and state",
+        "runtime": "SQL",
+        "scalability": "vertical"
+      }
+    },
+    {
+      "id": "11",
+      "type": "microservice",
+      "name": "Polishing Service",
+      "position": {
+        "x": 3660,
+        "y": 1035
+      },
+      "properties": {
+        "tech_stack": "RabbitMQ, Python",
+        "description": "Delivers refined output and feedback to user",
+        "runtime": "Python",
+        "scalability": "horizontal"
+      }
+    }
+  ],
+  "connections": [
+    {
+      "from": "3",
+      "to": "4",
+      "type": "direct",
+      "label": "dispatch planning"
+    },
+    {
+      "from": "4",
+      "to": "5",
+      "type": "direct",
+      "label": "subtask definition"
+    },
+    {
+      "from": "5",
+      "to": "9",
+      "type": "direct",
+      "label": "store research"
+    },
+    {
+      "from": "5",
+      "to": "6",
+      "type": "direct",
+      "label": "task dispatch"
+    },
+    {
+      "from": "6",
+      "to": "10",
+      "type": "direct",
+      "label": "persist state"
+    },
+    {
+      "from": "6",
+      "to": "7",
+      "type": "direct",
+      "label": "validation trigger"
+    },
+    {
+      "from": "8",
+      "to": "6",
+      "type": "direct",
+      "label": "refine execution"
+    },
+    {
+      "from": "6",
+      "to": "9",
+      "type": "direct",
+      "label": "store results"
+    },
+    {
+      "from": "9",
+      "to": "6",
+      "type": "direct",
+      "label": "read results"
+    },
+    {
+      "from": "10",
+      "to": "7",
+      "type": "direct",
+      "label": "read persisted state"
+    },
+    {
+      "from": "7",
+      "to": "11",
+      "type": "direct",
+      "label": "polish request"
+    },
+    {
+      "from": "11",
+      "to": "13",
+      "type": "direct",
+      "label": "push code"
+    },
+    {
+      "from": "1",
+      "to": "2",
+      "type": "direct",
+      "label": ""
+    },
+    {
+      "from": "2",
+      "to": "3",
+      "type": "direct",
+      "label": ""
+    },
+    {
+      "from": "11",
+      "to": "12",
+      "type": "direct",
+      "label": "push to repo"
+    },
+    {
+      "from": "13",
+      "to": "12",
+      "type": "direct",
+      "label": "mirror to remote"
+    },
+    {
+      "from": "11",
+      "to": "1",
+      "type": "http",
+      "label": "Final Deliverables"
+    },
+    {
+      "from": "7",
+      "to": "8",
+      "type": "http",
+      "label": ""
+    }
+  ]
+}
